@@ -1,0 +1,27 @@
+/*
+태크에 직접 연결하거나
+class 연결하거나
+id 연결
+기본 문법
+(태크, .class, #id) {
+    style들 정의
+}
+*/
+
+div {
+  height: 100px;
+  width: 100px;
+  background-color: blue;
+}
+a {
+  text-decoration: none;
+}
+#box {
+  width: 200px;
+  min-height: 100px;
+}
+
+.box .img {
+  width: 100rem;
+  min-height: 10vh;
+}

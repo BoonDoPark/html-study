@@ -1,0 +1,14 @@
+h1:hover {
+  color: chocolate;
+  transition: all 1s ease;
+  transform: scale(1.3);
+  transform: translate(100px, 100px);
+}
+
+.hidden {
+  transform: translate(-30%);
+}
+.hidden:hover {
+  transition: all 1s ease;
+  transform: translate(0, 0);
+}
