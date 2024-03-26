@@ -156,18 +156,185 @@ const teams = [
   },
 ];
 
-const body = document.getElementById("tbody");
+// const body = document.getElementById("tbody");
 
-for (let j = 0; j < teams.length; j++) {
+// for (let j = 0; j < teams.length; j++) {
+//   const tr = document.createElement("tr");
+//   for (let i in teams[j]) {
+//     const td = document.createElement("td");
+//     td.id = i;
+//     if (teams[j].rating === 0) {
+//       const float = teams[j].win / (teams[j].win + teams[j].lose);
+//       teams[j].rating = float.toFixed(2);
+//     }
+//     td.append(teams[j][i]);
+//     tr.appendChild(td);
+//   }
+//   body.appendChild(tr);
+// }
+
+const ageAsc = teams.sort((a, b) => a.age - b.age);
+console.log(ageAsc);
+
+const box = document.getElementById("box");
+
+const tbody = document.getElementById("tbody");
+for (let i = 0; i < teams.length; i++) {
+  const el = teams[i];
   const tr = document.createElement("tr");
-  for (let i in teams[j]) {
-    const td = document.createElement("td");
-    if (teams[j].rating === 0) {
-      const float = teams[j].win / (teams[j].win + teams[j].lose);
-      teams[j].rating = float.toFixed(2);
-    }
-    td.append(teams[j][i]);
-    tr.appendChild(td);
-  }
-  body.appendChild(tr);
+  const rank = document.createElement("td");
+  rank.innerHTML = `${el.rank} ${el.name}`;
+  tr.append(rank);
+  const win = document.createElement("td");
+  win.innerHTML = el.win;
+  tr.append(win);
+  const lose = document.createElement("td");
+  lose.innerHTML = el.lose;
+  tr.append(lose);
+  const winLoseDiff = document.createElement("td");
+  winLoseDiff.innerHTML = el.winLoseDiff;
+  tr.append(winLoseDiff);
+  const rate = document.createElement("td");
+  el.rate = Math.floor((el.win / (el.win + el.lose)) * 100) / 100;
+  rate.innerHTML = el.rate;
+  tr.append(rate);
+  const kda = document.createElement("td");
+  el.kda = Math.floor(((el.kill + el.assist) / el.death) * 100) / 100;
+  kda.innerHTML = el.kda;
+  tr.append(kda);
+  const kill = document.createElement("td");
+  kill.innerHTML = el.kill;
+  tr.append(kill);
+  const death = document.createElement("td");
+  death.innerHTML = el.death;
+  tr.append(death);
+  const assist = document.createElement("td");
+  assist.innerHTML = el.assist;
+  tr.append(assist);
+  tbody.append(tr);
 }
+let isAsc = true;
+const onClickSortHandler = (property) => {
+  let asc;
+  if (property === "rank") {
+    if (isAsc) {
+      asc = teams.sort((a, b) => a.rank - b.rank);
+      isAsc = false;
+    } else {
+      asc = teams.sort((a, b) => b.rank - a.rank);
+      isAsc = true;
+    }
+  }
+  if (property === "win") {
+    if (isAsc) {
+      asc = teams.sort((a, b) => a.win - b.win);
+      isAsc = false;
+    } else {
+      asc = teams.sort((a, b) => b.win - a.win);
+      isAsc = true;
+    }
+  }
+  if (property === "lose") {
+    if (isAsc) {
+      asc = teams.sort((a, b) => a.lose - b.lose);
+      isAsc = false;
+    } else {
+      asc = teams.sort((a, b) => b.lose - a.lose);
+      isAsc = true;
+    }
+  }
+  if (property === "winLoseDiff") {
+    if (isAsc) {
+      asc = teams.sort((a, b) => a.winLoseDiff - b.winLoseDiff);
+      isAsc = false;
+    } else {
+      asc = teams.sort((a, b) => b.winLoseDiff - a.winLoseDiff);
+      isAsc = true;
+    }
+  }
+  if (property === "kill") {
+    if (isAsc) {
+      asc = teams.sort((a, b) => a.kill - b.kill);
+      isAsc = false;
+    } else {
+      asc = teams.sort((a, b) => b.kill - a.kill);
+      isAsc = true;
+    }
+  }
+  if (property === "death") {
+    if (isAsc) {
+      asc = teams.sort((a, b) => a.death - b.death);
+      isAsc = false;
+    } else {
+      asc = teams.sort((a, b) => b.death - a.death);
+      isAsc = true;
+    }
+  }
+  if (property === "assist") {
+    if (isAsc) {
+      asc = teams.sort((a, b) => a.assist - b.assist);
+      isAsc = false;
+    } else {
+      asc = teams.sort((a, b) => b.assist - a.assist);
+      isAsc = true;
+    }
+  }
+  if (property === "rate") {
+    if (isAsc) {
+      asc = teams.sort((a, b) => a.rate - b.rate);
+      isAsc = false;
+    } else {
+      asc = teams.sort((a, b) => b.rate - a.rate);
+      isAsc = true;
+    }
+  }
+  if (property === "kda") {
+    if (isAsc) {
+      asc = teams.sort((a, b) => a.kda - b.kda);
+      isAsc = false;
+    } else {
+      asc = teams.sort((a, b) => b.kda - a.kda);
+      isAsc = true;
+    }
+  }
+
+  let tbody = document.getElementById("tbody");
+  if (tbody) tbody.remove();
+
+  const table = document.getElementsByTagName("table");
+  tbody = document.createElement("tbody");
+  for (let i = 0; i < asc.length; i++) {
+    const el = asc[i];
+    const tr = document.createElement("tr");
+    const rank = document.createElement("td");
+    rank.innerHTML = `${el.rank} ${el.name}`;
+    tr.append(rank);
+    const win = document.createElement("td");
+    win.innerHTML = el.win;
+    tr.append(win);
+    const lose = document.createElement("td");
+    lose.innerHTML = el.lose;
+    tr.append(lose);
+    const winLoseDiff = document.createElement("td");
+    winLoseDiff.innerHTML = el.winLoseDiff;
+    tr.append(winLoseDiff);
+    const rate = document.createElement("td");
+    rate.innerHTML = Math.floor((el.win / (el.win + el.lose)) * 100) / 100;
+    tr.append(rate);
+    const kda = document.createElement("td");
+    kda.innerHTML = Math.floor(((el.kill + el.assist) / el.death) * 100) / 100;
+    tr.append(kda);
+    const kill = document.createElement("td");
+    kill.innerHTML = el.kill;
+    tr.append(kill);
+    const death = document.createElement("td");
+    death.innerHTML = el.death;
+    tr.append(death);
+    const assist = document.createElement("td");
+    assist.innerHTML = el.assist;
+    tr.append(assist);
+    tbody.setAttribute("id", "tbody");
+    tbody.append(tr);
+    table[0].append(tbody);
+  }
+};
