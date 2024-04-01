@@ -7,9 +7,9 @@
   transform: scale(0.85);
 }
 .image:hover {
-  transition: all 5s;
+  transition: 3s;
   transition-delay: 1s;
-  transform: scale(0.85);
+  transform: scale(1.15);
 }
 .up {
   position: fixed;
